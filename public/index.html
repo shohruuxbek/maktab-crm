@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Maktab CRM</title>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eef4fb;--card:#fff;--card2:#f5f9ff;--inp:#fff;--ink:#0b1b33;--mut:#5b6f8a;--line:#cfe0f3;--acc:#145cff;--accT:#fff;--topbg:rgba(255,255,255,.92);--glow:#d3e6ff;--hi:#f2c14e;--ok:#1d8a5b;--no:#c8374a;--lt:#b9791a;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#020712;--card:#06172e;--card2:#030c1b;--inp:#020a17;--ink:#fff;--mut:#9fb2c9;--line:#164878;--acc:#0daaff;--accT:#001020;--ok:#38d6a0;--no:#ff6b81;--lt:#f2c14e;--topbg:rgba(2,7,18,.9);--glow:#092b59}}
+:root[data-theme="dark"]{--bg:#020712;--card:#06172e;--card2:#030c1b;--inp:#020a17;--ink:#fff;--mut:#9fb2c9;--line:#164878;--acc:#0daaff;--accT:#001020;--ok:#38d6a0;--no:#ff6b81;--lt:#f2c14e;--topbg:rgba(2,7,18,.9);--glow:#092b59}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Onest,system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+button,input,select{font:inherit;color:inherit}
+.top{display:flex;align-items:center;gap:10px;padding:12px 18px;background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:env(safe-area-inset-top,0px);z-index:5;flex-wrap:wrap}
+.brand{font-weight:700;font-size:18px;margin-right:auto}
+.brand i{display:inline-block;width:12px;height:12px;background:var(--hi);border-radius:3px;margin-right:8px}
+.btn{border:1px solid var(--line);background:var(--card);padding:7px 13px;border-radius:8px;cursor:pointer}
+.btn:hover{border-color:var(--acc)}
+.btn:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.btn.p{background:var(--acc);color:var(--accT);border-color:var(--acc)}
+.btn.d{color:var(--no)}
+.wrap{display:grid;grid-template-columns:200px 1fr;gap:20px;max-width:1100px;margin:20px auto;padding:0 16px}
+nav{display:flex;flex-direction:column;gap:4px}
+nav button{text-align:left;border:0;background:none;padding:9px 12px;border-radius:8px;cursor:pointer;color:var(--mut)}
+nav button.on{background:var(--card);color:var(--ink);font-weight:700;box-shadow:inset 3px 0 0 var(--hi)}
+main{min-width:0}
+h2{margin:0 0 14px;font-size:22px}
+h3{margin:0 0 10px;font-size:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:16px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+input,select,textarea{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;min-width:0}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse}
+th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:middle}
+th{color:var(--mut);font-weight:500;font-size:13px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-bottom:16px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px}
+.stat b{display:block;font-size:28px}
+.stat span{color:var(--mut);font-size:13px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg button{border:0;background:var(--bg);padding:6px 12px;cursor:pointer}
+.seg button.p.on{background:var(--ok);color:#fff}.seg button.a.on{background:var(--no);color:#fff}.seg button.l.on{background:var(--hi);color:#14213d}
+.mut{color:var(--mut)}.empty{color:var(--mut);padding:10px 0}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips label{border:1px solid var(--line);border-radius:999px;padding:4px 12px;cursor:pointer;display:flex;gap:6px;align-items:center}
+.login{max-width:360px;margin:60px auto;padding:0 16px}
+.login input{width:100%;margin-bottom:10px}
+.err{color:var(--no);margin:0 0 10px}.err:empty{display:none}
+.bd{display:inline-block;padding:2px 12px;border-radius:999px;font-size:13px;font-weight:700}.bd.p{background:var(--ok);color:#fff}.bd.a{background:var(--no);color:#fff}.bd.n{background:var(--bg);color:var(--mut);border:1px solid var(--line)}
+.ctl{display:flex;align-items:center;gap:10px}
+.lg{display:inline-flex;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:3px}
+.lg button{border:0;background:none;border-radius:999px;padding:5px 14px;cursor:pointer;font-weight:700;color:var(--mut);transition:.2s}
+.lg button.on{background:var(--acc);color:var(--accT)}
+.tg{width:62px;height:32px;border-radius:999px;border:1px solid var(--line);background:var(--bg);position:relative;cursor:pointer;padding:0;display:flex;align-items:center;justify-content:space-between;padding:0 8px;font-size:14px}
+.tg i{position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:var(--hi);transition:transform .25s}
+.tg.dk i{transform:translateX(30px)}
+.tg span{position:relative;z-index:1;line-height:1}
+.wk{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.gr th,.gr td{padding:4px 3px;text-align:center;font-size:13px;min-width:34px}
+.gr .nm{position:sticky;left:0;background:var(--card);text-align:left;min-width:150px;z-index:1;padding-left:8px}
+.gr th.sel{background:var(--hi);color:#14213d;border-radius:6px}.gr th.sel small{color:#14213d}
+.gr .we{background:var(--bg)}.gr th.tdy{color:var(--acc)}.gr small{color:var(--mut);font-weight:400}
+.c{width:28px;height:28px;border-radius:6px;border:1px solid var(--line);background:var(--bg);font-size:13px;padding:0;display:inline-block;line-height:26px}
+button.c{cursor:pointer}button.c:hover{border-color:var(--acc)}
+.c.p{background:var(--ok);color:#fff;border-color:var(--ok)}.c.a{background:var(--no);color:#fff;border-color:var(--no)}.c.l{background:var(--hi);color:#14213d;border-color:var(--hi)}
+.lgd{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px;font-size:13px;color:var(--mut)}
+@media(max-width:700px){.gr .nm{min-width:110px}.wrap{grid-template-columns:1fr}nav{flex-direction:row;overflow-x:auto}nav button{white-space:nowrap}}
+
+#toast{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--no);color:#fff;padding:10px 16px;border-radius:10px;z-index:50;display:none;max-width:90%}
+/* theme */
+.login.card{padding:26px 22px;width:min(380px,92%)}
+.login{border-color:#0a8cff;box-shadow:0 0 50px rgba(0,130,255,.25)}
+body{background:radial-gradient(circle at 82% 0%,var(--glow),transparent 40%),var(--bg);background-attachment:fixed}
+.top{background:var(--topbg);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:12px;margin-right:auto;text-decoration:none;color:var(--ink);font-size:inherit}
+.mark{display:block;width:40px;height:40px;background:linear-gradient(135deg,#27c5ff,#1457ff);clip-path:polygon(0 30%,86% 0,62% 100%,20% 90%)}
+.brand b{display:block;font-size:20px;line-height:1.1}.brand small{display:block;font-size:12px;color:var(--mut);letter-spacing:1px}
+.btn{border-color:var(--acc);color:var(--acc);font-weight:700;border-radius:8px;background:transparent}
+.btn:hover{background:var(--acc);color:var(--accT);box-shadow:0 0 22px rgba(0,140,255,.45)}
+.btn.p{background:linear-gradient(135deg,#0aa8ff,#145cff);color:#fff;border:0}
+.btn.p:hover{filter:brightness(1.12);color:#fff}
+.btn.d{color:var(--no);border-color:var(--no)}.btn.d:hover{background:var(--no);color:#fff;box-shadow:none}
+.card,.stat{background:linear-gradient(145deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:14px}
+.stat b{color:var(--acc)}
+h2{text-transform:uppercase;letter-spacing:.5px}
+th{text-transform:uppercase;letter-spacing:.6px;font-size:12px}
+input,select,textarea{background:var(--inp)}
+input:focus,select:focus,textarea:focus{border-color:var(--acc)}
+nav button:hover{color:var(--acc)}
+nav button.on{background:linear-gradient(145deg,var(--card),var(--card2));border:1px solid var(--line);box-shadow:inset 3px 0 0 var(--acc),0 0 22px rgba(0,140,255,.15)}
+.lg button.on{background:linear-gradient(135deg,#0aa8ff,#145cff);color:#fff}
+.hero-in{display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:center;max-width:1100px;margin:0 auto;padding:50px 16px;min-height:calc(100vh - 80px)}
+.hero h4{font-size:24px;margin:0}
+.hero h1{font-size:clamp(40px,6vw,68px);line-height:.95;text-transform:uppercase;letter-spacing:-2px;margin:6px 0 14px}
+.blue{color:#0daaff;text-shadow:0 0 28px #006eff}
+.lead{font-size:18px;margin:0}
+.minis{display:flex;gap:12px;flex-wrap:wrap;margin:22px 0 0}
+.mini{background:var(--card);border:1px solid var(--line);padding:14px 16px;border-radius:10px}
+.mini b{display:block;font-size:15px}.mini span{font-size:13px;color:var(--mut)}
+.hero .login{margin:0;max-width:none;padding:28px;border-color:#0a8cff;box-shadow:0 0 50px rgba(0,130,255,.25)}
+@media(max-width:800px){.hero-in{grid-template-columns:1fr;min-height:0;padding-top:30px}}
+</style>
+</head>
+<body>
+<div id="app"></div><div id="toast"></div>
+<script>
+const D={
+uz:{app:"Maktab CRM",login:"Kirish",user:"Login",pass:"Parol",bad:"Login yoki parol noto'g'ri",out:"Chiqish",
+dash:"Umumiy",teachers:"Ustozlar",students:"O'quvchilar",cats:"Kategoriyalar",books:"Darsliklar",groups:"Sinf / guruhlar",att:"Davomat",
+name:"Ism familiya",phone:"Telefon",add:"Qo'shish",del:"O'chirish",teacher:"Ustoz",choose:"Tanlang",none:"Hozircha ma'lumot yo'q",
+title:"Nomi",author:"Muallif",cat:"Kategoriya",group:"Guruh",date:"Sana",present:"Keldi",absent:"Kelmadi",late:"Kechikdi",rate:"Davomat",
+members:"Guruh a'zolari",myStudents:"Mening o'quvchilarim",noStud:"Sizga o'quvchi biriktirilmagan. Super admin biriktiradi.",
+gname:"Guruh yoki sinf nomi (masalan 7-A)",create:"Yaratish",today:"Bugungi davomat",total:"Jami",save:"Saqlandi",role:"Rol",adm:"Super admin",tch:"Ustoz",
+pickG:"Avval guruh yarating",stuCount:"O'quvchilar",ovr:"Guruhlar davomati",mark:"Belgilang",lang:"RU",theme:"Rejim",dl:"Qorong'i",lt:"Yorug'"},
+ru:{app:"Школа CRM",login:"Войти",user:"Логин",pass:"Пароль",bad:"Неверный логин или пароль",out:"Выйти",
+dash:"Обзор",teachers:"Учителя",students:"Ученики",cats:"Категории",books:"Учебники",groups:"Классы / группы",att:"Посещаемость",
+name:"Имя и фамилия",phone:"Телефон",add:"Добавить",del:"Удалить",teacher:"Учитель",choose:"Выберите",none:"Пока нет данных",
+title:"Название",author:"Автор",cat:"Категория",group:"Группа",date:"Дата",present:"Пришёл",absent:"Не пришёл",late:"Опоздал",rate:"Посещаемость",
+members:"Состав группы",myStudents:"Мои ученики",noStud:"Вам не назначены ученики. Их назначает супер админ.",
+gname:"Название класса или группы (например 7-А)",create:"Создать",today:"Посещаемость сегодня",total:"Всего",save:"Сохранено",role:"Роль",adm:"Супер админ",tch:"Учитель",
+pickG:"Сначала создайте группу",stuCount:"Ученики",ovr:"Посещаемость по группам",mark:"Отметьте",lang:"UZ",theme:"Режим",dl:"Тёмная",lt:"Светлая"}};
+const K='crm_school_v1';
+let S={teachers:[],students:[],cats:[],books:[],groups:[],att:{},hw:[],fin:[]};
+let P={lang:'uz',theme:'dark'};
+let U=null,tab='dash',gsel='',date=todayS(),dayD=todayS(),err='',flash='';
+try{const p=localStorage.getItem(K+'p');if(p)P=Object.assign(P,JSON.parse(p))}catch(e){}
+let T=null,pend=null,busy=false,dirty=false;
+const ES=()=>({teachers:[],students:[],books:[],groups:[],att:{},hw:[],fin:[]});
+function toast(m){let el=document.getElementById('toast');if(!el)return;el.textContent=m;el.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>el.style.display='none',4500)}
+async function api(m,u,b){const r=await fetch(u,{method:m,headers:Object.assign({'Content-Type':'application/json'},T?{Authorization:'Bearer '+T}:{}),body:b?JSON.stringify(b):undefined});
+ if(r.status===401&&U){U=null;T=null;try{localStorage.removeItem(K+'t')}catch(e){}S=ES();render()}return r}
+async function load(){const r=await api('GET','/api/state');if(r.ok)S=Object.assign(ES(),await r.json());return r.ok}
+function save(){try{localStorage.setItem(K+'p',JSON.stringify(P))}catch(e){}if(!U||U.role==='student')return;dirty=true;clearTimeout(pend);pend=setTimeout(push,250)}
+async function push(){pend=null;if(busy){pend=setTimeout(push,300);return}busy=true;dirty=false;
+ try{const r=await api('PUT','/api/state',S);if(!r.ok){toast(t('saveErr'));await load();render()}}catch(e){toast(t('saveErr'))}busy=false}
+async function poll(){if(!U||dirty||busy||pend)return;const a=document.activeElement;if(a&&/INPUT|TEXTAREA|SELECT/.test(a.tagName))return;
+ try{const r=await api('GET','/api/state');if(!r.ok)return;const d=Object.assign(ES(),await r.json());if(JSON.stringify(d)!==JSON.stringify(S)){S=d;render()}}catch(e){}}
+const homeTab=()=>U.role==='admin'?'dash':U.role==='teacher'?'groups':'hw';
+const t=k=>D[P.lang][k]||k;
+const e=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const id=()=>Math.random().toString(36).slice(2,9);
+const v=i=>(document.getElementById(i)||{}).value||'';
+const byId=(a,i)=>a.find(x=>x.id===i);
+function setTheme(){document.documentElement.setAttribute('data-theme',P.theme)}
+function setLang(l){P.lang=l;document.documentElement.lang=l;save();render()}
+function tglLang(){P.lang=P.lang==='uz'?'ru':'uz';document.documentElement.lang=P.lang;save();render()}
+function tglTheme(){P.theme=P.theme==='dark'?'light':'dark';setTheme();save();render()}
+function go(x){tab=x;render()}
+let luv='';
+async function login(){const u=v('lu').trim(),p=v('lp');luv=u;
+ try{const r=await fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({login:u,password:p})});
+  if(!r.ok){err=r.status===429?t('wait'):t('bad');render();return}
+  const d=await r.json();T=d.token;U=d.user;try{localStorage.setItem(K+'t',T)}catch(e){}
+  await load();tab=homeTab();err=''}catch(e){err=t('net')}
+ render()}
+function logout(){U=null;T=null;S=ES();try{localStorage.removeItem(K+'t')}catch(e){}render()}
+/* admin actions */
+function addTeacher(){const n=v('tn').trim(),l=v('tl').trim(),p=v('tp');if(!chk(n,l,p))return;
+ const tid=id();S.teachers.push({id:tid,name:n,login:l,pass:p});
+ const gn=v('tgn').trim();if(gn)S.groups.push({id:id(),name:gn,teacherId:tid,studentIds:[]});
+ document.querySelectorAll('.tgc:checked').forEach(c=>{const g=byId(S.groups,c.value);if(g){g.teacherId=tid;g.studentIds.forEach(i=>{const x=byId(S.students,i);if(x)x.teacherId=tid})}});
+ save();render()}
+function delTeacher(i){S.teachers=S.teachers.filter(a=>a.id!==i);S.students.forEach(s=>{if(s.teacherId===i)s.teacherId=''});S.groups.forEach(g=>{if(g.teacherId===i)g.teacherId=''});save();render()}
+function loginTaken(l){return l==='admin'||S.teachers.some(a=>a.login===l)||S.students.some(a=>a.login===l)}
+function chk(n,l,p){const m=n&&l&&p?(loginTaken(l)?t('taken'):''):t('fill');const f=document.getElementById('fm');if(f)f.textContent=m;return !m}
+function addStudent(){const n=v('sn').trim(),l=v('sl').trim(),pw=v('sw');if(!chk(n,l,pw))return;const sid=id(),gid=v('sg');S.students.push({id:sid,name:n,phone:v('sp').trim(),login:l,pass:pw,teacherId:v('st')});
+ const g=byId(S.groups,gid);if(g)g.studentIds.push(sid);save();render()}
+function gopts(tid){const a=S.groups.filter(g=>g.teacherId===(tid||''));return `<option value="">${t('group')}</option>`+a.map(g=>`<option value="${g.id}">${e(g.name)}</option>`).join('')}
+function fillG(){document.getElementById('sg').innerHTML=gopts(v('st'))}
+function delStudent(i){S.fin=S.fin.filter(f=>f.studentId!==i);S.students=S.students.filter(a=>a.id!==i);S.groups.forEach(g=>g.studentIds=g.studentIds.filter(x=>x!==i));save();render()}
+function setStT(i,tid){const s=byId(S.students,i);s.teacherId=tid;S.groups.forEach(g=>{if(g.teacherId!==tid)g.studentIds=g.studentIds.filter(x=>x!==i)});save();render()}
+function addBook(){const n=v('bn').trim();if(!n)return;S.books.push({id:id(),title:n,author:v('ba').trim()});save();render()}
+function delBook(i){S.books=S.books.filter(a=>a.id!==i);save();render()}
+/* teacher actions */
+function addGroup(){const n=v('gn').trim();if(!n)return;const g={id:id(),name:n,teacherId:U.id,studentIds:[]};S.groups.push(g);gsel=g.id;save();render()}
+function delGroup(i){S.hw=S.hw.filter(h=>h.groupId!==i);S.groups=S.groups.filter(g=>g.id!==i);if(gsel===i)gsel='';save();render()}
+function toggleMember(gid,sid,on){const g=byId(S.groups,gid);g.studentIds=g.studentIds.filter(x=>x!==sid);if(on)g.studentIds.push(sid);save()}
+function pickG(x){gsel=x;render()}
+function pickD(x){if(x){date=x;render()}}
+function mark(gid,sid,val){const k=gid+'|'+date;S.att[k]=S.att[k]||{};S.att[k][sid]=val;save();render()}
+function rate(gid,sid){let n=0,ok=0;for(const k in S.att){if(k.split('|')[0]!==gid)continue;const r=S.att[k][sid];if(r){n++;if(r!=='a')ok++}}return n?Math.round(ok/n*100)+'%':'—'}
+function gRate(gid){let n=0,ok=0;for(const k in S.att){if(k.split('|')[0]!==gid)continue;for(const s in S.att[k]){n++;if(S.att[k][s]!=='a')ok++}}return n?Math.round(ok/n*100)+'%':'—'}
+/* views */
+const opts=(a,sel,lab)=>`<option value="">${e(lab||t('choose'))}</option>`+a.map(x=>`<option value="${x.id}"${x.id===sel?' selected':''}>${e(x.name||x.title)}</option>`).join('');
+const tbl=(h,rows)=>rows.length?`<div class="tw"><table><tr>${h.map(x=>`<th>${t(x)}</th>`).join('')}</tr>${rows.join('')}</table></div>`:`<div class="empty">${t('none')}</div>`;
+function vDash(){const td=Object.keys(S.att).filter(k=>k.endsWith('|'+todayS()));let pr=0;td.forEach(k=>{for(const s in S.att[k])if(S.att[k][s]!=='a')pr++});
+ return `<h2>${t('dash')}</h2><div class="stats"><div class="stat"><b>${S.teachers.length}</b><span>${t('teachers')}</span></div><div class="stat"><b>${S.students.length}</b><span>${t('students')}</span></div><div class="stat"><b>${S.groups.length}</b><span>${t('groups')}</span></div><div class="stat"><b>${S.books.length}</b><span>${t('books')}</span></div><div class="stat"><b>${pr}</b><span>${t('today')}</span></div><div class="stat"><b style="font-size:20px;line-height:42px">${money(totalDebt())}</b><span>${t('totalDebt')}</span></div></div>
+ <div class="card"><h3>${t('ovr')}</h3>${tbl(['group','teacher','stuCount','rate'],S.groups.map(g=>`<tr><td>${e(g.name)}</td><td>${e((byId(S.teachers,g.teacherId)||{}).name)}</td><td>${g.studentIds.length}</td><td>${gRate(g.id)}</td></tr>`))}</div>`}
+function vTeachers(){return `<h2>${t('teachers')}</h2><div class="card"><p class="err" id="fm"></p><div class="row"><input id="tn" placeholder="${t('name')}"><input id="tl" placeholder="${t('user')}" autocomplete="off"><input id="tp" placeholder="${t('pass')}" autocomplete="off"><input id="tgn" placeholder="${t('newGroup')}"></div>${freeG()}<div style="margin-top:12px"><button class="btn p" onclick="addTeacher()">${t('add')}</button></div></div>
+ <div class="card">${tbl(['name','user','pass','group','stuCount',''],S.teachers.map(a=>`<tr><td>${e(a.name)}</td><td>${e(a.login)}</td><td>${e(a.pass)}</td><td>${S.groups.filter(g=>g.teacherId===a.id).map(g=>e(g.name)).join(', ')||'—'}</td><td>${S.students.filter(s=>s.teacherId===a.id).length}</td><td><button class="btn d" onclick="delTeacher('${a.id}')">${t('del')}</button></td></tr>`))}</div>`}
+function vStudents(){return `<h2>${t('students')}</h2><div class="card"><p class="err" id="fm"></p><div class="row"><input id="sn" placeholder="${t('name')}"><input id="sp" placeholder="${t('phone')}"><input id="sl" placeholder="${t('user')}" autocomplete="off"><input id="sw" placeholder="${t('pass')}" autocomplete="off"><select id="st" onchange="fillG()">${opts(S.teachers,'',t('teacher'))}</select><select id="sg">${gopts('')}</select><button class="btn p" onclick="addStudent()">${t('add')}</button></div></div>
+ <div class="card">${tbl(['name','phone','user','pass','teacher','group',''],S.students.map(s=>`<tr><td>${e(s.name)}</td><td>${e(s.phone)}</td><td>${e(s.login)||'—'}</td><td>${e(s.pass)||'—'}</td><td><select onchange="setStT('${s.id}',this.value)">${opts(S.teachers,s.teacherId,t('teacher'))}</select></td><td>${S.groups.filter(g=>g.studentIds.includes(s.id)).map(g=>e(g.name)).join(', ')||'—'}</td><td><button class="btn d" onclick="delStudent('${s.id}')">${t('del')}</button></td></tr>`))}</div>`}
+function vBooks(ro){return `<h2>${t('books')}</h2>${ro?'':`<div class="card"><div class="row"><input id="bn" placeholder="${t('title')}"><input id="ba" placeholder="${t('author')}"><button class="btn p" onclick="addBook()">${t('add')}</button></div></div>`}
+ <div class="card">${tbl(ro?['title','author']:['title','author',''],S.books.map(b=>`<tr><td>${e(b.title)}</td><td>${e(b.author)}</td>${ro?'':`<td><button class="btn d" onclick="delBook('${b.id}')">${t('del')}</button></td>`}</tr>`))}</div>`}
+function addDays(d,n){const x=new Date(d+'T00:00:00Z');x.setUTCDate(x.getUTCDate()+n);return x.toISOString().slice(0,10)}
+function wStart(d){const x=new Date(d+'T00:00:00Z');return addDays(d,-((x.getUTCDay()+6)%7))}
+function cnt(gid,sid,a,b){const r={p:0,l:0,a:0};for(const k in S.att){const q=k.split('|');if(q[0]!==gid||q[1]<a||q[1]>b)continue;const x=S.att[k][sid];if(x)r[x]++}return r}
+function shiftW(n){date=addDays(date,7*n);render()}
+function weekCard(g,only){const ws=wStart(date),we=addDays(ws,6),st=g.studentIds.map(i=>byId(S.students,i)).filter(Boolean).filter(s=>!only||s.id===only);
+ const rows=st.map(s=>{const r=cnt(g.id,s.id,ws,we);return `<tr><td>${e(s.name)}</td><td style="color:var(--ok)"><b>${r.p}</b></td><td style="color:var(--lt)"><b>${r.l}</b></td><td style="color:var(--no)"><b>${r.a}</b></td><td>${rate(g.id,s.id)}</td></tr>`});
+ const w4=[3,2,1,0].map(n=>addDays(ws,-7*n));
+ const hist=st.map(s=>`<tr><td>${e(s.name)}</td>${w4.map(w=>{const r=cnt(g.id,s.id,w,addDays(w,6));return `<td><b style="color:var(--ok)">${r.p+r.l}</b> / <b style="color:var(--no)">${r.a}</b></td>`}).join('')}</tr>`);
+ return `<div class="card"><h3>${t('wkStats')}</h3><div class="wk"><button class="btn" onclick="shiftW(-1)" aria-label="prev">‹</button><b>${ws} — ${we}</b><button class="btn" onclick="shiftW(1)" aria-label="next">›</button></div>${tbl(['name','present','late','absent','rate'],rows)}</div>
+ <div class="card"><h3>${t('hist')}</h3>${tbl(['name',...w4.map(w=>w.slice(5))],hist)}</div>`}
+function vReport(){const gs=S.groups;if(!gs.length)return `<h2>${t('report')}</h2><div class="card empty">${t('none')}</div>`;
+ if(!byId(gs,gsel))gsel=gs[0].id;const g=byId(gs,gsel);
+ return `<h2>${t('report')}</h2><div class="card"><select onchange="pickG(this.value)">${gs.map(x=>`<option value="${x.id}"${x.id===gsel?' selected':''}>${e(x.name)} — ${e((byId(S.teachers,x.teacherId)||{}).name)}</option>`).join('')}</select></div>`+grid(g,true)+weekCard(g)}
+function mine(){return S.groups.filter(g=>g.teacherId===U.id)}
+function vGroups(){const my=S.students.filter(s=>s.teacherId===U.id);
+ return `<h2>${t('groups')}</h2><div class="card"><div class="row"><input id="gn" placeholder="${t('gname')}" style="flex:1;min-width:200px"><button class="btn p" onclick="addGroup()">${t('create')}</button></div></div>`+
+ (my.length?'':`<div class="card empty">${t('noStud')}</div>`)+
+ mine().map(g=>`<div class="card"><div class="row" style="justify-content:space-between"><h3>${e(g.name)}</h3><button class="btn d" onclick="delGroup('${g.id}')">${t('del')}</button></div><div class="mut" style="margin-bottom:8px">${t('members')}</div><div class="chips">${my.map(s=>`<label><input type="checkbox" ${g.studentIds.includes(s.id)?'checked':''} onchange="toggleMember('${g.id}','${s.id}',this.checked)">${e(s.name)}</label>`).join('')||'<span class="mut">—</span>'}</div></div>`).join('')}
+function freeG(){const f=S.groups.filter(g=>!g.teacherId);return f.length?`<div class="mut" style="margin:12px 0 6px">${t('pickGroups')}</div><div class="chips">${f.map(g=>`<label><input type="checkbox" class="tgc" value="${g.id}">${e(g.name)}</label>`).join('')}</div>`:''}
+function addAGroup(){const n=v('gn').trim();if(!n)return;S.groups.push({id:id(),name:n,teacherId:v('gt'),studentIds:[]});save();render()}
+function setGT(gid,tid){const g=byId(S.groups,gid);g.teacherId=tid;if(tid)g.studentIds=g.studentIds.filter(i=>{const x=byId(S.students,i);if(!x)return false;if(!x.teacherId)x.teacherId=tid;return x.teacherId===tid});save();render()}
+function vAGroups(){return `<h2>${t('groups')}</h2><div class="card"><h3>${t('newG')}</h3><div class="row"><input id="gn" placeholder="${t('gname')}" style="flex:1;min-width:200px"><span class="mut">${t('teacherSel')}:</span><select id="gt">${opts(S.teachers,'',t('unassigned'))}</select><button class="btn p" onclick="addAGroup()">${t('create')}</button></div></div>`+
+ (S.groups.length?'':`<div class="card empty">${t('none')}</div>`)+S.groups.map(g=>{const ms=S.students.filter(x=>g.teacherId&&x.teacherId===g.teacherId);
+ return `<div class="card"><div class="row" style="justify-content:space-between"><h3>${e(g.name)}</h3><div class="row"><select onchange="setGT('${g.id}',this.value)">${opts(S.teachers,g.teacherId,t('unassigned'))}</select><button class="btn d" onclick="delGroup('${g.id}')">${t('del')}</button></div></div><div class="mut" style="margin-bottom:8px">${t('members')}</div><div class="chips">${g.teacherId?(ms.map(x=>`<label><input type="checkbox" ${g.studentIds.includes(x.id)?'checked':''} onchange="toggleMember('${g.id}','${x.id}',this.checked)">${e(x.name)}</label>`).join('')||'<span class="mut">—</span>'):`<span class="mut">${t('pickTeacherFirst')}</span>`}</div></div>`}).join('')}
+function pickDay(x){if(x){dayD=x;date=x;render()}}
+function markDay(gid,sid,val){const k=gid+'|'+dayD;S.att[k]=S.att[k]||{};if(S.att[k][sid]===val)delete S.att[k][sid];else S.att[k][sid]=val;save();render()}
+function shiftM(n){const x=new Date(date+'T00:00:00Z');x.setUTCMonth(x.getUTCMonth()+n,1);date=x.toISOString().slice(0,10);render()}
+function cyc(gid,sid,ds){const k=gid+'|'+ds;S.att[k]=S.att[k]||{};const r=S.att[k][sid];if(!r)S.att[k][sid]='p';else if(r==='p')S.att[k][sid]='l';else if(r==='l')S.att[k][sid]='a';else delete S.att[k][sid];save();render()}
+function allP(gid){const ds=dayD,k=gid+'|'+ds;S.att[k]=S.att[k]||{};byId(S.groups,gid).studentIds.forEach(i=>{if(!S.att[k][i])S.att[k][i]='p'});save();render()}
+function grid(g,ro,only){const m=date.slice(0,7),Y=+m.slice(0,4),M=+m.slice(5,7),n=new Date(Date.UTC(Y,M,0)).getUTCDate(),days=[...Array(n)].map((_,i)=>i+1),wd=t('wd'),td=todayS(),sym={p:'✓',l:'!',a:'✕'};
+ const st=g.studentIds.map(i=>byId(S.students,i)).filter(Boolean).filter(s=>!only||s.id===only);
+ const dsOf=d=>m+'-'+String(d).padStart(2,'0');
+ const head=`<tr><th class="nm">${t('name')}</th><th style="color:var(--ok)">✓</th><th style="color:var(--lt)">!</th><th style="color:var(--no)">✕</th><th>%</th>${days.map(d=>{const ds=dsOf(d),w=new Date(ds+'T00:00:00Z').getUTCDay();return `<th class="${w===0||w===6?'we':''}${ds===td?' tdy':''}${ds===dayD?' sel':''}"${ro?'':` onclick="pickDay('${ds}')" style="cursor:pointer" title="${ds}"`}>${d}<br><small>${wd[w]}</small></th>`}).join('')}</tr>`;
+ const rows=st.map(s=>{let c={p:0,l:0,a:0};const cells=days.map(d=>{const ds=dsOf(d),w=new Date(ds+'T00:00:00Z').getUTCDay(),r=(S.att[g.id+'|'+ds]||{})[s.id];if(r)c[r]++;const cls=`c ${r||''}`;
+  return `<td class="${w===0||w===6?'we':''}">${ro?`<span class="${cls}">${sym[r]||''}</span>`:`<button class="${cls}" onclick="cyc('${g.id}','${s.id}','${ds}')">${sym[r]||''}</button>`}</td>`}).join('');
+  const tot=c.p+c.l+c.a;return `<tr><td class="nm">${e(s.name)}</td><td><b>${c.p}</b></td><td><b>${c.l}</b></td><td><b>${c.a}</b></td><td>${tot?Math.round((c.p+c.l)/tot*100)+'%':'—'}</td>${cells}</tr>`}).join('');
+ return `<div class="card"><div class="wk"><button class="btn" onclick="shiftM(-1)" aria-label="prev">‹</button><b>${t('mon')[M-1]} ${Y}</b><button class="btn" onclick="shiftM(1)" aria-label="next">›</button></div>${st.length?`<div class="tw gw"><table class="gr">${head}${rows}</table></div>`:`<div class="empty">${t('none')}</div>`}<div class="lgd"><span><span class="c p">✓</span> ${t('present')}</span><span><span class="c l">!</span> ${t('late')}</span><span><span class="c a">✕</span> ${t('absent')}</span>${ro?'':`<span>${t('clickHint')}</span>`}</div></div>`}
+function vAtt(){const gs=mine();if(!gs.length)return `<h2>${t('att')}</h2><div class="card empty">${t('pickG')}</div>`;
+ if(!byId(gs,gsel))gsel=gs[0].id;const g=byId(gs,gsel),rec=S.att[g.id+'|'+dayD]||{},st=g.studentIds.map(i=>byId(S.students,i)).filter(Boolean);
+ const rows=st.map(x=>{const r=rec[x.id],b=(c,l)=>`<button class="${c}${r===c?' on':''}" onclick="markDay('${g.id}','${x.id}','${c}')">${t(l)}</button>`;return `<tr><td>${e(x.name)}</td><td><div class="seg">${b('p','present')}${b('l','late')}${b('a','absent')}</div></td></tr>`});
+ return `<h2>${t('att')}</h2><div class="card"><div class="row"><select onchange="pickG(this.value)">${gs.map(x=>`<option value="${x.id}"${x.id===gsel?' selected':''}>${e(x.name)}</option>`).join('')}</select></div></div>
+ <div class="card"><h3>${t('dayMark')}</h3><div class="row" style="margin-bottom:10px"><input type="date" value="${dayD}" onchange="pickDay(this.value)"><button class="btn" onclick="allP('${g.id}')">${t('allCame')}</button></div>${tbl(['name','mark'],rows)}</div>`+grid(g,false)+weekCard(g)}
+function addHw(){const gid=v('hg'),ti=v('ht').trim();if(!gid||!ti)return;S.hw.push({id:id(),groupId:gid,teacherId:U.id,title:ti,text:v('hx').trim(),due:v('hd'),created:todayS()+'T'+Date.now(),done:{}});save();render()}
+function delHw(i){S.hw=S.hw.filter(h=>h.id!==i);save();render()}
+function setHw(hid,sid,val){const h=byId(S.hw,hid);if(h.done[sid]===val)delete h.done[sid];else h.done[sid]=val;save();render()}
+function allHw(hid,val){const h=byId(S.hw,hid),g=byId(S.groups,h.groupId);g.studentIds.forEach(i=>h.done[i]=val);save();render()}
+function vTHw(){const gs=mine();if(!gs.length)return `<h2>${t('hw')}</h2><div class="card empty">${t('pickG')}</div>`;
+ const hs=S.hw.filter(h=>byId(gs,h.groupId)).sort((a,b)=>b.created.localeCompare(a.created));
+ const form=`<div class="card"><h3>${t('newHw')}</h3><div class="row" style="margin-bottom:8px"><select id="hg">${gs.map(g=>`<option value="${g.id}">${e(g.name)}</option>`).join('')}</select><input id="ht" placeholder="${t('hwTitle')}" style="flex:1;min-width:180px"><input id="hd" type="date" value="${addDays(todayS(),1)}"></div><textarea id="hx" placeholder="${t('hwText')}" style="width:100%;min-height:70px;margin-bottom:8px"></textarea><button class="btn p" onclick="addHw()">${t('give')}</button></div>`;
+ return `<h2>${t('hw')}</h2>`+form+(hs.length?'':`<div class="card empty">${t('noHw')}</div>`)+hs.map(h=>{const g=byId(gs,h.groupId),st=g.studentIds.map(i=>byId(S.students,i)).filter(Boolean);
+  const y=st.filter(x=>h.done[x.id]==='p').length,n=st.filter(x=>h.done[x.id]==='a').length;
+  return `<div class="card"><div class="row" style="justify-content:space-between"><h3 style="margin:0">${e(h.title)}</h3><button class="btn d" onclick="delHw('${h.id}')">${t('del')}</button></div><div class="mut" style="margin:4px 0 8px">${e(g.name)} — ${t('due')}: ${h.due||'—'}</div>${h.text?`<p style="white-space:pre-wrap;margin:0 0 10px">${e(h.text)}</p>`:''}
+  <div class="row" style="margin-bottom:8px"><b style="color:var(--ok)">${t('done')}: ${y}</b><b style="color:var(--no)">${t('notDone')}: ${n}</b><span class="mut">${t('pending')}: ${st.length-y-n}</span><button class="btn" onclick="allHw('${h.id}','p')">${t('allDone')}</button></div>
+  ${tbl(['name','check'],st.map(x=>{const r=h.done[x.id];return `<tr><td>${e(x.name)}</td><td><div class="seg"><button class="p${r==='p'?' on':''}" onclick="setHw('${h.id}','${x.id}','p')">${t('done')}</button><button class="a${r==='a'?' on':''}" onclick="setHw('${h.id}','${x.id}','a')">${t('notDone')}</button></div></td></tr>`}))}</div>`}).join('')}
+function vSHw(){const gs=S.groups.filter(g=>g.studentIds.includes(U.id)),hs=S.hw.filter(h=>gs.some(g=>g.id===h.groupId)).sort((a,b)=>b.created.localeCompare(a.created));
+ return `<h2>${t('hw')}</h2>`+(hs.length?'':`<div class="card empty">${t('noHw')}</div>`)+hs.map(h=>{const r=h.done[U.id],g=byId(gs,h.groupId),tc=byId(S.teachers,h.teacherId)||{};
+  return `<div class="card"><div class="row" style="justify-content:space-between"><h3 style="margin:0">${e(h.title)}</h3><span class="bd ${r||'n'}">${r==='p'?t('done'):r==='a'?t('notDone'):t('pending')}</span></div><div class="mut" style="margin:4px 0 8px">${e(g.name)} — ${e(tc.name)} — ${t('due')}: ${h.due||'—'}</div>${h.text?`<p style="white-space:pre-wrap;margin:0">${e(h.text)}</p>`:''}</div>`}).join('')}
+function vSAtt(){const gs=S.groups.filter(g=>g.studentIds.includes(U.id));
+ return `<h2>${t('att')}</h2>`+(gs.length?gs.map(g=>`<h3>${e(g.name)}</h3>`+grid(g,true,U.id)+weekCard(g,U.id)).join(''):`<div class="card empty">${t('none')}</div>`)}
+function todayS(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function money(n){return Number(n).toLocaleString('ru-RU')+' '+t('cur')}
+function bal(sid){let b=0;S.fin.forEach(f=>{if(f.studentId===sid)b+=f.type==='debt'?f.amount:-f.amount});return b}
+function totalDebt(){let r=0;S.students.forEach(s=>{const b=bal(s.id);if(b>0)r+=b});return r}
+function sOpts(sel){return `<option value="">${t('stud')}</option>`+S.students.map(x=>`<option value="${x.id}"${x.id===sel?' selected':''}>${e(x.name)}</option>`).join('')}
+let payStu='';
+function fe(m){const f=document.getElementById('fe');if(f)f.textContent=m||''}
+function addFin(type){const k=type==='debt'?'d':'p',sid=v(k+'s'),amt=Math.round(+v(k+'a'));if(!sid||!(amt>0)){fe(t('fill'));return}
+ S.fin.push({id:id(),studentId:sid,type,amount:amt,date:v(k+'d')||todayS(),note:v(k+'n').trim(),method:v(k+'m')});if(type==='pay')payStu=sid;save();render()}
+function bulkDebt(){const gid=v('bg'),amt=Math.round(+v('ba'));if(!(amt>0)){fe(t('fill'));return}
+ const g=byId(S.groups,gid),ids=g?g.studentIds:S.students.map(x=>x.id);ids.forEach(i=>S.fin.push({id:id(),studentId:i,type:'debt',amount:amt,date:v('bd')||todayS(),note:v('bn').trim(),method:''}));save();render()}
+function delFin(i){S.fin=S.fin.filter(f=>f.id!==i);save();render()}
+function goPay(i){payStu=i;tab='pay';render()}
+function payBal(){const el=document.getElementById('pb'),sid=v('ps');if(el)el.textContent=sid?t('curBal')+': '+money(bal(sid)):''}
+const sName=i=>(byId(S.students,i)||{}).name||'—';
+const grpOf=i=>S.groups.filter(g=>g.studentIds.includes(i)).map(g=>e(g.name)).join(', ')||'—';
+function vDebts(){let dn=0;const rows=S.students.map(x=>{let c=0,p=0;S.fin.forEach(f=>{if(f.studentId===x.id){if(f.type==='debt')c+=f.amount;else p+=f.amount}});if(c-p>0)dn++;return{x,c,p,b:c-p}}).sort((a,b)=>b.b-a.b);
+ const led=[...S.fin].reverse().filter(f=>f.type==='debt').sort((a,b)=>b.date.localeCompare(a.date));
+ return `<h2>${t('debts')}</h2><div class="stats"><div class="stat"><b style="font-size:20px;line-height:42px">${money(totalDebt())}</b><span>${t('totalDebt')}</span></div><div class="stat"><b>${dn}</b><span>${t('debtors')}</span></div></div>
+ <div class="card"><h3>${t('newDebt')}</h3><p class="err" id="fe"></p><div class="row"><select id="ds">${sOpts('')}</select><input id="da" type="number" min="1" placeholder="${t('amount')}"><input id="dd" type="date" value="${todayS()}"><input id="dn" placeholder="${t('note')}" style="flex:1;min-width:140px"><button class="btn p" onclick="addFin('debt')">${t('writeDebt')}</button></div></div>
+ <div class="card"><h3>${t('bulkTitle')}</h3><div class="row"><select id="bg"><option value="">${t('allStud')}</option>${S.groups.map(g=>`<option value="${g.id}">${e(g.name)}</option>`).join('')}</select><input id="ba" type="number" min="1" placeholder="${t('amount')}"><input id="bd" type="date" value="${todayS()}"><input id="bn" placeholder="${t('note')}" style="flex:1;min-width:140px"><button class="btn p" onclick="bulkDebt()">${t('writeDebt')}</button></div></div>
+ <div class="card">${tbl(['stud','group','charged','paid','balance',''],rows.map(r=>`<tr><td>${e(r.x.name)}</td><td>${grpOf(r.x.id)}</td><td>${money(r.c)}</td><td>${money(r.p)}</td><td style="color:${r.b>0?'var(--no)':'var(--ok)'}"><b>${r.b<0?money(-r.b)+' ('+t('prepaid')+')':money(r.b)}</b></td><td><button class="btn" onclick="goPay('${r.x.id}')">${t('pay')}</button></td></tr>`))}</div>
+ <div class="card"><h3>${t('ledger')}</h3>${tbl(['date','stud','amount','note',''],led.map(f=>`<tr><td>${f.date}</td><td>${e(sName(f.studentId))}</td><td style="color:var(--no)"><b>${money(f.amount)}</b></td><td>${e(f.note)}</td><td><button class="btn d" onclick="delFin('${f.id}')">${t('del')}</button></td></tr>`))}</div>`}
+function vPay(){const ps=[...S.fin].reverse().filter(f=>f.type==='pay').sort((a,b)=>b.date.localeCompare(a.date)),mo=todayS().slice(0,7);
+ const mt=ps.filter(f=>f.date.slice(0,7)===mo).reduce((a,f)=>a+f.amount,0);
+ return `<h2>${t('pay')}</h2><div class="stats"><div class="stat"><b style="font-size:20px;line-height:42px">${money(mt)}</b><span>${t('monthPaid')}</span></div><div class="stat"><b style="font-size:20px;line-height:42px">${money(totalDebt())}</b><span>${t('totalDebt')}</span></div></div>
+ <div class="card"><h3>${t('newPay')}</h3><p class="err" id="fe"></p><div class="row"><select id="ps" onchange="payBal()">${sOpts(payStu)}</select><input id="pa" type="number" min="1" placeholder="${t('amount')}"><input id="pd" type="date" value="${todayS()}"><select id="pm"><option value="cash">${t('cash')}</option><option value="card">${t('card')}</option><option value="transfer">${t('transfer')}</option></select><input id="pn" placeholder="${t('note')}" style="flex:1;min-width:140px"><button class="btn p" onclick="addFin('pay')">${t('takePay')}</button></div><div class="mut" id="pb" style="margin-top:8px">${payStu?t('curBal')+': '+money(bal(payStu)):''}</div></div>
+ <div class="card"><h3>${t('payHist')}</h3>${tbl(['date','stud','method','amount','note',''],ps.map(f=>`<tr><td>${f.date}</td><td>${e(sName(f.studentId))}</td><td>${t(f.method)}</td><td style="color:var(--ok)"><b>${money(f.amount)}</b></td><td>${e(f.note)}</td><td><button class="btn d" onclick="delFin('${f.id}')">${t('del')}</button></td></tr>`))}</div>`}
+function render(){setTheme();const A=document.getElementById('app');
+ const bar=`<div class="top"><a class="brand"><span class="mark"></span><b>${t('app')}</b></a><div class="lg" role="group" aria-label="Til / Язык"><button class="${P.lang==='uz'?'on':''}" onclick="setLang('uz')">UZ</button><button class="${P.lang==='ru'?'on':''}" onclick="setLang('ru')">RU</button></div><button class="tg ${P.theme==='dark'?'dk':''}" onclick="tglTheme()" aria-label="${t('theme')}"><i></i><span>☀️</span><span>🌙</span></button>${U?`<span class="mut">${e(U.name)}</span><button class="btn" onclick="logout()">${t('out')}</button>`:''}</div>`;
+ if(!U){A.innerHTML=bar+`<div class="login card"><h2>${t('login')}</h2>${err?`<p class="err">${err}</p>`:''}<input id="lu" value="${e(luv)}" placeholder="${t('user')}" autocomplete="username"><input id="lp" type="password" placeholder="${t('pass')}" autocomplete="current-password" onkeydown="if(event.key==='Enter')login()"><button class="btn p" style="width:100%" onclick="login()">${t('login')}</button></div>`;return}
+ const nav=U.role==='admin'?[['dash','dash'],['teachers','teachers'],['groups','groups'],['students','students'],['debts','debts'],['pay','pay'],['books','books'],['report','report']]:U.role==='teacher'?[['groups','groups'],['att','att'],['hw','hw'],['books','books']]:[['hw','hw'],['att','att'],['books','books']];
+ if(!nav.some(x=>x[0]===tab))tab=nav[0][0];
+ const V={dash:vDash,teachers:vTeachers,students:vStudents,report:vReport,debts:vDebts,pay:vPay,books:()=>vBooks(U.role!=='admin'),groups:()=>U.role==='admin'?vAGroups():vGroups(),att:()=>U.role==='student'?vSAtt():vAtt(),hw:()=>U.role==='teacher'?vTHw():vSHw()};
+ const sy=window.scrollY,gw0=document.querySelector('.gw'),gl=gw0?gw0.scrollLeft:null;
+ A.innerHTML=bar+`<div class="wrap"><nav>${nav.map(x=>`<button class="${tab===x[0]?'on':''}" onclick="go('${x[0]}')">${t(x[1])}</button>`).join('')}</nav><main>${V[tab]()}</main></div>`;window.scrollTo(0,sy);const gw=document.querySelector('.gw');if(gw){if(gl!==null)gw.scrollLeft=gl;else{const c=gw.querySelector('th.sel,th.tdy');if(c)gw.scrollLeft=Math.max(0,c.offsetLeft-220)}}}
+Object.assign(D.uz,{saveErr:"Saqlashda xato. Server yoki internetni tekshiring",net:"Server bilan aloqa yo'q",wait:"Juda ko'p urinish. Bir daqiqadan keyin qayta urining",heroA:"HAZORASPDAGI",heroB:"YAGONA",heroC:"O'QUV MARKAZ",heroP:"O'quvchilarni kamida 3 oyda daromadga yo'naltiramiz!",mini1:"BMT GRANT G'OLIBI",mini1s:"Yoshlar uchun imkoniyatlar",mini2:"Amaliy va zamonaviy ta'lim",mini3:"Tajribali mentorlar",mini4:"Zamonaviy texnologiyalar",debts:"Qarzlar daftari",pay:"To'lovlar",amount:"Summa",note:"Izoh",writeDebt:"Qarz yozish",takePay:"To'lovni saqlash",bulkTitle:"Guruhga yoki hammaga qarz yozish",allStud:"Hamma o'quvchilar",charged:"Hisoblangan",paid:"To'langan",balance:"Qoldiq",method:"To'lov turi",cash:"Naqd",card:"Karta",transfer:"O'tkazma",cur:"so'm",totalDebt:"Umumiy qarz",debtors:"Qarzdorlar",curBal:"Joriy qoldiq",payHist:"To'lovlar tarixi",ledger:"Qarz yozuvlari",stud:"O'quvchi",prepaid:"oldindan",monthPaid:"Shu oy tushum",newDebt:"Yangi qarz yozish",newPay:"Yangi to'lov",hw:"Uyga vazifa",newHw:"Yangi uyga vazifa berish",hwTitle:"Mavzu",hwText:"Vazifa matni (ixtiyoriy)",due:"Muddat",done:"Bajarildi",notDone:"Bajarilmadi",pending:"Tekshirilmagan",noHw:"Hozircha uyga vazifa yo'q",taken:"Bu login band, boshqasini yozing",fill:"Barcha maydonlarni to'ldiring",give:"Butun guruhga berish",allDone:"Hammasi bajardi",check:"Tekshiruv",newG:"Yangi guruh yaratish",teacherSel:"Ustozni biriktirish",newGroup:"Yangi guruh nomi (ixtiyoriy)",pickGroups:"Ustozsiz guruhlardan biriktirish",allCame:"Hammasi keldi",dayMark:"Kunlik davomat",clickHint:"Katakni bosing: keldi, kechikdi, kelmadi, bo'sh",unassigned:"Ustozsiz",pickTeacherFirst:"Avval ustoz tanlang",mon:["Yanvar","Fevral","Mart","Aprel","May","Iyun","Iyul","Avgust","Sentabr","Oktabr","Noyabr","Dekabr"],wd:["Ya","Du","Se","Ch","Pa","Ju","Sh"],report:"Davomat hisoboti",week:"Hafta",hist:"Oxirgi 4 hafta (keldi / kelmadi)",wkStats:"Haftalik davomat",came:"Keldi",missed:"Kelmadi"});
+Object.assign(D.ru,{saveErr:"Ошибка сохранения. Проверьте сервер или интернет",net:"Нет связи с сервером",wait:"Слишком много попыток. Повторите через минуту",heroA:"В ХАЗАРАСПЕ",heroB:"ЕДИНЫЙ",heroC:"УЧЕБНЫЙ ЦЕНТР",heroP:"Выводим учеников на доход минимум за 3 месяца!",mini1:"ПОБЕДИТЕЛЬ ГРАНТА ООН",mini1s:"Возможности для молодёжи",mini2:"Практическое и современное обучение",mini3:"Опытные наставники",mini4:"Современные технологии",debts:"Книга долгов",pay:"Платежи",amount:"Сумма",note:"Примечание",writeDebt:"Записать долг",takePay:"Сохранить платёж",bulkTitle:"Записать долг группе или всем",allStud:"Все ученики",charged:"Начислено",paid:"Оплачено",balance:"Остаток",method:"Способ оплаты",cash:"Наличные",card:"Карта",transfer:"Перевод",cur:"сум",totalDebt:"Общий долг",debtors:"Должники",curBal:"Текущий остаток",payHist:"История платежей",ledger:"Записи долгов",stud:"Ученик",prepaid:"предоплата",monthPaid:"Поступления за месяц",newDebt:"Новая запись долга",newPay:"Новый платёж",hw:"Домашнее задание",newHw:"Новое домашнее задание",hwTitle:"Тема",hwText:"Текст задания (необязательно)",due:"Срок",done:"Выполнено",notDone:"Не выполнено",pending:"Не проверено",noHw:"Пока нет домашних заданий",taken:"Этот логин занят, введите другой",fill:"Заполните все поля",give:"Задать всей группе",allDone:"Все выполнили",check:"Проверка",newG:"Создать новую группу",teacherSel:"Назначить учителя",newGroup:"Название новой группы (необязательно)",pickGroups:"Назначить группы без учителя",allCame:"Все пришли",dayMark:"Посещаемость за день",clickHint:"Нажимайте на клетку: пришёл, опоздал, пропустил, пусто",unassigned:"Без учителя",pickTeacherFirst:"Сначала выберите учителя",mon:["Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"],wd:["Вс","Пн","Вт","Ср","Чт","Пт","Сб"],report:"Отчёт посещаемости",week:"Неделя",hist:"Последние 4 недели (пришёл / пропустил)",wkStats:"Посещаемость за неделю",came:"Пришёл",missed:"Пропустил"});
+(async()=>{try{T=localStorage.getItem(K+'t')}catch(e){}
+ if(T){try{const r=await api('GET','/api/me');if(r.ok){U=(await r.json()).user;await load();tab=homeTab()}else{T=null}}catch(e){err=t('net')}}
+ render();setInterval(poll,20000)})();
+</script>
+</body>
+</html>
